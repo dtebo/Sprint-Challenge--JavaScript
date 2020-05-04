@@ -8,27 +8,63 @@
 
 // tyrannosaurus, carnivorous, 7000kg, 12m, Late Cretaceous
 
+function Tyrannosaurus(){
+  this.name = "tyrannosaurus";
+  this.diet = "carnivorous";
+  this.weight = "7000kg";
+  this.length = "12m";
+  this.period = "Late Cretaceous"
+}
+
 // stegosaurus, herbivorous, 2000kg, 9m, Late Jurassic
+
+function Stegosaurus(){
+  this.name = "stegosaurus";
+  this.diet = "herbivorus";
+  this.weight = "2000kg";
+  this.length = "9m";
+  this.period = "Late Jurassic"
+}
 
 // velociraptor, carnivorous, 15kg, 1.8m, Late Cretaceous
 
+function Velociraptor(){
+  this.name = "velociraptor";
+  this.diet = "carnivorous";
+  this.weight = "15kg";
+  this.length = "1.8m";
+  this.period = "Late Cretaceous"
+}
+
 // Using your dinosaur objects, log answers to these questions:
 
+const trex = new Tyrannosaurus();
+const steg = new Stegosaurus();
+const raptor = new Velociraptor();
+
 // How much did tyrannosaurus weigh?
-console.log();
+
+console.log(trex.weight);
 
 // What was the diet of a velociraptor?
-console.log();
+
+console.log(raptor.diet);
 
 // How long was a stegosaurus?
-console.log();
+
+console.log(steg.length);
 
 // What time period did tyrannosaurus live in?
-console.log();
+console.log(trex.period);
 
 
 // Create a new roar method for the tyrannosaurus.  When called, return "RAWERSRARARWERSARARARRRR!" Log the result.
-console.log();
+
+trex.prototype.roar = function(){
+  return "RAWERSRARARWERSARARARRRR!";
+};
+
+console.log(trex.roar());
 
 
 // ==== Arrays ====
@@ -52,6 +88,10 @@ const graduates = [
 
 Once you have the new array created, log the result. */
 const universities = [];
+
+/* loop through the graduates and grab their university */
+graduates.forEach((graduate) => { universities.push(graduate.university); });
+
 console.log(universities);
 
 /* Request 2: Create a new array called contactInfo that contains both first name and email of each student. This will be an array of strings.
@@ -60,11 +100,19 @@ The resulting contact information strings should have a space between the first 
 "Josh josh@example.com"
 
 Log the result of your new array. */
-const contactInfo = [];
+const contactInfo = graduates.map((grad) => { return `${grad.first_name} ${grad.email}`; });
+
 console.log(contactInfo);
 
 /* Request 3: Find out how many universities have the string "Uni" included in their name. Create a new array called unisWithUni that contains them all. This will be an array of objects. Log the result. */
 const unisWithUni = [];
+
+graduates.forEach((grad) => { 
+  if(grad.university.contains('Uni')){
+    unisWithUni.push(grad); /* University contains the characters 'Uni', add this graduate object to the array */
+  }
+});
+
 console.log(unisWithUni);
 
 
@@ -91,6 +139,9 @@ The zoos want to display both the scientific name and the animal name in front o
 
 */
 const displayNames = [];
+
+zooAnimals.forEach((animal) => { displayNames.push(`${animal_name}, ${scientific_name}`); });
+
 console.log(displayNames);
 
 /* Request 2: .map()
@@ -99,7 +150,8 @@ The zoos need a list of all their animal's names (animal_name only) converted to
 
 */
 
-const lowCaseAnimalNames = [];
+const lowCaseAnimalNames = zooAnimals.map((animal) => { return `${animal_name}`.toLowerCase(); });
+
 console.log(lowCaseAnimalNames);
 
 /* Request 3: .filter() 
@@ -107,7 +159,8 @@ console.log(lowCaseAnimalNames);
 The zoos are concerned about animals with a lower population count. Using filter, create a new array of objects called lowPopulationAnimals which contains only the animals with a population less than 5.
 
 */
-const lowPopulationAnimals = [];
+const lowPopulationAnimals = zooAnimals.filter((animal) => { return animal.population < 5; });
+
 console.log(lowPopulationAnimals);
 
 /* Request 4: .reduce() 
@@ -116,6 +169,10 @@ The zoos need to know their total animal population across the United States. Fi
 
 */
 const populationTotal = 0;
+
+/* Calculate the total number of animals in all zoos in the United States */
+zooAnimals.reduce((populationTotal, pop) => { return populationTotal += pop; }, 0);
+
 console.log(populationTotal);
 
 
